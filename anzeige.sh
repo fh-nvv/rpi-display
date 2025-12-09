@@ -8,7 +8,7 @@ matchbox-window-manager &
 while true; do
   if sudo ping -c 1 -w 180 nvv.de | grep -o "time"; then
     if ps -a | grep -o "firefox"; then
-                        sleep 60
+                        sleep 90
                 else
                         firefox --kiosk "DISPLAY_URL" & disown
                 fi

@@ -21,6 +21,11 @@ chmod -R 777 ./
 install.sh "Display Bahnhof Bebra" "https://auskunft.nvv.de/mct/views/monitor/index.html?cfgFile=InSMKOpD1JmPGpTZXTTN_1637768804978"
 ```
 
+4a. bei veralteten Geräten auch das Betriebssystem update
+```
+sudo rpi-upgrade
+```
+
 5. folgende Befehle ausführen
 ```
 crontab ./crontab.conf
@@ -64,3 +69,22 @@ sudo mv ./ssmtp.conf /etc/ssmtp/ssmtp.conf
 ```
 
 12. reboot oder shutdown, ab hier fertig konfiguriert
+
+## WLan aufsetzen
+
+1. interface entblocken, wobei X die jeweilige Interface-ID ist **default 1** 
+```
+sudo rfblock unblock X
+```
+
+2. interface öffnen
+```
+sudo ifconfig wlan0 up
+```
+
+3. über raspi-config konfigurieren (B1->S1)
+
+4. überprüfen, ob die Konfiguration funktioniert hat
+```
+ip a
+```

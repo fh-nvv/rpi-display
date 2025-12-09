@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt dist-upgrade -y
-sudo apt install firefox firefox-l10n-de x11-xserver-utils unclutter matchbox-window-manager wireguard xdotool openbox xserver-xorg mosquitto-clients xinit scrot mpack ssmtp resolvconf -y
+sudo apt install firefox firefox-l10n-de x11-xserver-utils unclutter matchbox-window-manager wireguard xdotool openbox xserver-xorg mosquitto-clients xinit scrot mpack ssmtp resolvconf raindrop -y
 
 # adds startup scripts to bash
 echo "
