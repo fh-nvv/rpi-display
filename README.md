@@ -23,7 +23,7 @@ install.sh "Display Bahnhof Bebra" "https://auskunft.nvv.de/mct/views/monitor/in
 
 4a. bei veralteten Geräten auch das Betriebssystem update
 ```
-sudo rpi-upgrade
+sudo rpi-update
 ```
 
 5. folgende Befehle ausführen
