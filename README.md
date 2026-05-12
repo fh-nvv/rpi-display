@@ -68,7 +68,9 @@ scp .\{path-to-conf}\ssmtp.conf nvv@192.168.YYY.XXX:/home/nvv/
 sudo mv ./ssmtp.conf /etc/ssmtp/ssmtp.conf
 ```
 
-12. reboot oder shutdown, ab hier fertig konfiguriert
+12. Sicheres Passwort nach Vorgaben erstellen und in der geteilten Datei speichern
+
+13. reboot oder shutdown, ab hier fertig konfiguriert
 
 ## WLan aufsetzen
 
