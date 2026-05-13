@@ -1,0 +1,33 @@
+[Unit]
+Description=NVV Kiosk
+After=systemd-user-sessions.service network-online.target
+Wants=network-online.target
+
+[Service]
+User=nvv
+Group=nvv
+
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/nvv/.Xauthority
+Environment=HOME=/home/nvv
+
+WorkingDirectory=/home/nvv
+
+ExecStartPre=/bin/sleep 5
+
+ExecStart=/usr/bin/xinit /home/nvv/anzeige_systemd.sh -- :0 vt1 -keeptty
+
+Restart=always
+RestartSec=5
+
+StandardInput=tty
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
