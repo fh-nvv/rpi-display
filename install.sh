@@ -10,7 +10,7 @@ temp=\$(tty);
 
 if [ \${temp:5} == \"tty1\" ]; then
     /home/nvv/mqtt.sh & disown;
-    /home/nvv/startAnzeige.sh;
+    sudo /home/nvv/startAnzeige.sh;
 else
     echo "NVV System";
 fi" >> .bashrc
@@ -24,3 +24,4 @@ display_url_param=$(echo "$2" | sed 's|&|\\&|g')
 
 sed -i "s|DISPLAY_NAME|$display_name_param|g" check_refresh.sh
 sed -i "s|DISPLAY_URL|$display_url_param|g" anzeige.sh
+sed -i "s|DISPLAY_URL|$display_url_param|g" anzeige_systemd.sh
