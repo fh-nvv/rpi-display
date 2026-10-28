@@ -16,30 +16,36 @@ scp .\{rpi-display-repo}\* nvv@192.168.YYY.XXX:/home/nvv/
 chmod -R 777 ./
 ```
 
-4. install.sh ausführen, bspw. für Bahnhof Bebra
+4. Berechtigung für das Ausführen des Anzeige-Skripts erteilen
+```
+sudo visudo
+nvv     ALL=(ALL:ALL) NOPASSWD: /home/nvv/startAnzeige.sh
+```
+
+5. install.sh ausführen, bspw. für Bahnhof Bebra
 ```
 install.sh "Display Bahnhof Bebra" "https://auskunft.nvv.de/mct/views/monitor/index.html?cfgFile=InSMKOpD1JmPGpTZXTTN_1637768804978"
 ```
 
-4a. bei veralteten Geräten auch das Betriebssystem update
+5a. bei veralteten Geräten auch das Betriebssystem update
 ```
 sudo rpi-update
 ```
 
-5. folgende Befehle ausführen
+6. folgende Befehle ausführen
 ```
 crontab ./crontab.conf
 ```
 
-6. reboot
+7. reboot
 
-7. in  `~/.mozilla/firefox/*.default-release/prefs.js` folgende Zeilen einfügen (deaktiviert die Sidebar), **erst wenn firefox einmal gestartet wurde**
+8. in  `~/.mozilla/firefox/*.default-release/prefs.js` folgende Zeilen einfügen (deaktiviert die Sidebar), **erst wenn firefox einmal gestartet wurde**
 ```
 user_pref("sidebar.revamp", false);
 user_pref("sidebar.visibility", "hide-sidebar");
 ```
 
-8. kopiere relevante wireguard config nach `/home/nvv`, **sudo berechtigung notwendig**
+9. kopiere relevante wireguard config nach `/home/nvv`, **sudo berechtigung notwendig**
 ```
 scp .\{rpi-display-repo}\wg-configs\{wg-dpi-XX} nvv@192.168.YYY.XXX:/home/nvv/
 ```
@@ -48,12 +54,12 @@ anschließend als `wg6.conf` ins `/etc/home/`
 sudo mv ./wg-dpi-XX /etc/wireguard/wg6.conf
 ```
 
-9. wireguard config einstellen
+10. wireguard config einstellen
 ```
 wg-quick up wg6
 ```
 
-10. wireguard service einstellen
+11. wireguard service einstellen
 ```
 sudo systemctl enable wg-quick@wg6
 ```
@@ -62,15 +68,15 @@ testbar über bspw. `ping`, packets sollten rausgehen
 ping 10.10.10.1
 ```
 
-11. smtp conf einrichten, `ssmtp.conf` ist nicht im repo vorhanden. Jasper oder Fabian sollten die haben. **Optional**, wenn bereits in Schritt 2 kopiert
+12. smtp conf einrichten, `ssmtp.conf` ist nicht im repo vorhanden. Jasper oder Fabian sollten die haben. **Optional**, wenn bereits in Schritt 2 kopiert
 ```
 scp .\{path-to-conf}\ssmtp.conf nvv@192.168.YYY.XXX:/home/nvv/
 sudo mv ./ssmtp.conf /etc/ssmtp/ssmtp.conf
 ```
 
-12. Sicheres Passwort nach Vorgaben erstellen und in der geteilten Datei speichern
+13. Sicheres Passwort nach Vorgaben erstellen und in der geteilten Datei speichern
 
-13. reboot oder shutdown, ab hier fertig konfiguriert
+14. reboot oder shutdown, ab hier fertig konfiguriert
 
 ## WLan aufsetzen
 
@@ -90,3 +96,22 @@ sudo ifconfig wlan0 up
 ```
 ip a
 ```
+
+## Wireguard Config erstellen 
+
+1. SSH Verbindung auf Nordhessen.id (Wireguard Server) 
+```
+ssh harnagea@aaa.bbb.ccc.ddd
+```
+
+2. Auf Admin User wechseln
+```
+su - harnagea_admin
+```
+
+3. Folgendes Skript ausführen
+```
+sudo /root/create_wg_client.sh "display-pi-XX"
+```
+
+4. Erstellte Wireguard Config auf das Raspberry Pi übertragen (copy-paste oder scp)
